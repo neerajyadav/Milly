@@ -13,12 +13,12 @@ namespace Milly
             validator = _validator;
         }
 
-        public Tuple<int, int[]> RetrieveTestCase(int index)
+        public Tuple<int, int[]> RetrieveTestCase(int testCaseNumber)
         {
-            if (index > 1 && index < input.Length / 2)
-                throw new ArgumentOutOfRangeException(nameof(index), "invalid index. Index should count from 1 to number of test cases.");
+            if (testCaseNumber < 1 || testCaseNumber > input.Length / 2)
+                throw new ArgumentOutOfRangeException(nameof(testCaseNumber), "invalid index. Index should count from 1 to number of test cases.");
 
-            int numberOfStudentsRowIndex = (index * 2) - 1;
+            int numberOfStudentsRowIndex = (testCaseNumber * 2) - 1;
             int studentRanksRowIndex = numberOfStudentsRowIndex + 1;
 
             if(!validator.IsNumOfStudentsRowHasValidData(numberOfStudentsRowIndex))
@@ -26,7 +26,7 @@ namespace Milly
 
             int numberOfStudents = Convert.ToInt32(input[numberOfStudentsRowIndex]);
 
-            if(!validator.IsStudentRankRowHasValidData(studentRanksRowIndex))
+            if(!validator.IsStudentRankRowHasValidData(studentRanksRowIndex, numberOfStudents))
                 throw new ArithmeticException($"invalid rank data for students at row number { studentRanksRowIndex + 1 }");
 
             var studentRanks = TransformStudentRanksString(input[studentRanksRowIndex]);

@@ -48,12 +48,13 @@ namespace Milly
             return false;
         }
 
-        public bool IsStudentRankRowHasValidData(int index)
+        public bool IsStudentRankRowHasValidData(int index, int numOfStudents)
         {
             string row = input[index];
             if (row.Replace(" ", "").All(char.IsDigit))
             {
-                return true;
+                if (row.Split(' ').Length == numOfStudents)
+                    return true;
             }
             return false;
         }
