@@ -18,12 +18,12 @@ namespace Milly
                     //validate input
                     //For production code we should use dependency injection to inject validator.
                     IInputValidator validator = new InputValidator(content);
-                    if (!validator.IsNumberOfTestCasesValid())
+                    if (!validator.IsTestCasesNumberValid())
                     {
                         Console.Error.WriteLine("Line 1: number of test cases not valid. Test cases count should be between 1 to 10.");
                         Console.WriteLine("Exiting application...");
                     }
-                    if (!validator.IsTestCaseCountValid())
+                    if (!validator.IsCountOfWrittenTestCasesValid())
                     {
                         Console.Error.WriteLine("Invalid input. Number of test cases written does not match with count mentioned in Line 1.");
                         Console.WriteLine("Exiting application...");

@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Linq;
 
 namespace Milly
 {
@@ -11,7 +12,7 @@ namespace Milly
             input = _input;
         }
 
-        public bool IsNumberOfTestCasesValid()
+        public bool IsTestCasesNumberValid()
         {
             if (Int16.TryParse(input[0].Trim(), out Int16 numberOfTestCases))
             {
@@ -24,13 +25,48 @@ namespace Milly
             return false;
         }
 
-        public bool IsTestCaseCountValid()
+        public bool IsCountOfWrittenTestCasesValid()
         {
             Int16 numberOfTestCases = Convert.ToInt16(input[0].Trim());
             if (input.Length == (numberOfTestCases * 2) + 1)
                 return true;
             else
                 return false;
+        }
+
+        public bool IsNumOfStudentsRowHasValidData(int index)
+        {
+            string row = input[index];
+            if (int.TryParse(row, out int numOfStudents))
+            {
+                if (1 <= numOfStudents && numOfStudents <= 100000)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsStudentRankRowHasValidData(int index)
+        {
+            string row = input[index];
+            if (row.Replace(" ", "").All(char.IsDigit))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool ValidateTestCase(int studentCount, int[] ranks)
+        {
+            if (studentCount != ranks.Length)
+                return false;
+
+            if (ranks.Distinct().Count() != ranks.Length)
+                return false;
+
+            return true;
         }
     }
 }

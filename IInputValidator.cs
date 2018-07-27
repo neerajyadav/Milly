@@ -2,8 +2,10 @@ namespace Milly
 {
     public interface IInputValidator
     {
-        bool IsNumberOfTestCasesValid();
-        bool IsTestCaseCountValid();
-
+        bool IsTestCasesNumberValid();
+        bool IsCountOfWrittenTestCasesValid();
+        bool IsNumOfStudentsRowHasValidData(int index);
+        bool IsStudentRankRowHasValidData(int index);
+        bool ValidateTestCase(int studentCount, int[] ranks);
     }
 }
